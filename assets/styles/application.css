@@ -111,8 +111,9 @@ input[type="tel"].dark {
   text-align: center;
 }
 
-#new-sync_space {
+#new-sync-space {
     margin: 20px 0;
+    display: none;
 }
 
 .error {

@@ -46,6 +46,17 @@ module.exports = {
 			return obj;
 		}
 
+	},
+
+	beforeCreate: function (values, next) {
+
+		// Add check here if desired to confirm pass and pass confirmation match
+
+		require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword) {
+			if(err) return next(err);
+			values.password = encryptedPassword;
+			next();
+		});
 	}
 };
 
