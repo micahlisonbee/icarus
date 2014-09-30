@@ -1,0 +1,33 @@
+<div id="home-hero">
+	<div class="container">
+		<div id="home-logo">SynchroDev</div>
+		<div class="col-md-6">
+			<div id="home-bullets">
+				<div class="home-bullet">Synchronized Interactions</div>
+				<div class="home-bullet">Rapid Development</div>
+				<div class="home-bullet">Cross-Device</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+		    <form id="signup-form" accept-charset="UTF-8" action="/user/create" method="post">
+		    	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				<input class="" name="firstName" placeholder="First Name" type="text"> 
+				<input class="" name="lastName" placeholder="Last Name" type="text"> 
+		        <input class="" name="email" placeholder="Email" type="text">
+		        <input class="" name="password" placeholder="Password" type="password">
+		        <div class="col-md-6"> 
+		        	<button class="btn btn-default" type="submit">Sign Up</button>
+		        </div>
+		        <div class="col-md-6"> 
+		        	<div id="or">or <a href="">Sign In</a></div>
+		   	 	</div>
+		   	 	<div class="clearfix"></div>
+		   	 	<div id="signup-legal">
+		   	 		By joining SynchroDev, you agree to Boncom's User Agreement and Privacy Policy.
+				</div>
+		    </form>
+
+		</div>
+		
+	</div>
+</div>

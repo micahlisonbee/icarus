@@ -1,0 +1,127 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	var newSyncSpaceDiv = $('#new-sync-space');
+
+	$('#new-sync-space-btn').click(function(){
+		if (newSyncSpaceDiv.is(":visible")) {
+			newSyncSpaceDiv.slideUp();
+		}
+		else {
+			newSyncSpaceDiv.slideDown();
+		}
+	});
+
+	var newSyncSpaceForm = $('#new-sync-space-form');
+
+	newSyncSpaceForm.validate();
+
+	newSyncSpaceForm.submit(function() {
+
+		if (!$(this).valid()) {
+			return false;
+		}
+
+		$('#new-sync-space-errors').hide();
+		$('#new-sync-space-success').hide();
+
+		var errorHandler = function(response) {
+		  console.log("Error Saving Object");
+		  $('.errors-wrapper').prepend('Whoops! There was an error creating this Sync Space.');
+
+		  if (response.error) {
+		    // show user the actual error
+		    $('#new-sync-space-errors').append(response.error);
+		    $('#new-sync-space-errors').show();
+		  }
+
+		};
+
+		var dataString = $(this).serialize();
+
+		$.ajax({
+		    type: "POST",
+		    url: $(this).attr('action'),
+		    data: dataString,
+		    dataType: "JSON"
+		}).success(function(response){
+		    
+		    console.log(response);
+
+		    if (response.error || !response.id) {
+		      errorHandler(response);
+		    }
+		    else {
+		      	// Successful save, insert the row
+		      	$('#new-sync-space-success').show();
+		      	newSyncSpaceDiv.fadeOut(1500, function(){
+
+		      		$('#new-sync-space-success').hide();
+
+		      		//reset the form
+		      		newSyncSpaceForm.find('input').val('');
+
+		      	});
+
+		      	$('#sync_space-list table tr:last').after('<tr><td>check</td><td>'+ response.name+ '</td><td>'+ response.url +'</td></tr>');
+		      	
+		      	
+		    }
+
+		}).error(function(response){
+		    
+		    errorHandler(response);
+
+		});
+
+		return false; // prevents normal behaviour
+
+	});
+
+
+
+});
+
+</script>
+
+<div class="container top-container">
+	<div class="col-md-6 page-title">Dashboard</div>
+	<div class="col-md-6 page-button">
+		<button id="new-sync-space-btn" class="btn btn-default">New Sync Space</button>
+	</div>
+	<div class="clearfix"></div>
+	
+	<div id="new-sync-space">
+		<form action="syncSpace/create" method="POST" id="new-sync-space-form">
+			<div class="col-md-3">New Sync Space:</div>
+			<div class="col-md-3"><input name="sync_space[name]" class="dark" type="text" placeholder="Name" required /></div>
+			<div class="col-md-3"><input name="sync_space[url]" class="dark" type="text" placeholder="URL" required /></div>
+			<div class="col-md-3"><button id="submit-new-sync-space-btn" class="btn btn-default">Create</button></div>
+			<div class="clearfix"></div>
+		</form>
+		<div id="new-sync-space-errors" class="error">Whoops! There was an error. </div>
+		<div id="new-sync-space-success" class="success">Successfully Added</div>
+	</div>
+
+	<div id="sync_space-list">
+		<table>
+			<tr>
+				<th></th>
+				<th>Name</th>
+				<th>Url</th>
+			</tr>
+
+			<% syncSpaces.forEach(function(sp, index){ %>
+
+				<tr>
+					<td>check</td>
+					<td><%= sp.name  %></td>
+					<td><%= sp.url  %></td>
+				</tr>
+
+			<% }); %>
+	
+		</table>
+	</div>
+</div>
