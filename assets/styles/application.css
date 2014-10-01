@@ -56,6 +56,14 @@ body {
     padding: 15px;
 }
 
+#signin-form {
+    display: block;
+    width: 300px;
+    background: gray;
+    margin: auto;
+    padding: 15px;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="tel"],

@@ -1,3 +1,62 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	var signupForm = $('#signup-form');
+
+	signupForm.validate();
+
+	signupForm.submit(function() {
+
+		if (!$(this).valid()) {
+			return false;
+		}
+
+		var errorDiv = $('#signup-errors');
+		var successDiv = $('#signup-success');
+
+		errorDiv.hide();
+		successDiv.hide();
+
+		var errorHandler = function(response) {
+		  console.log("Error Creating Account");
+		  errorDiv.text('Whoops! There was an error creating this account. ');
+
+		  if (response.err) {
+		    // show user the actual error
+		    errorDiv.append(response.err);
+		  }
+
+		  errorDiv.show();
+
+		};
+
+		var successHandler = function(response) {
+			if (response.err) {
+				errorHandler(response);
+				return;
+			} else {
+				if (response.user) {
+					// User created... redirect.
+					console.log(response.user);
+				}
+			}
+		};
+
+		var dataString = $(this).serialize();
+
+		makeAjaxRequest("POST", $(this).attr('action'), dataString, successHandler, errorHandler);
+
+		return false; // prevents normal behaviour
+
+	});
+
+
+
+});
+
+</script>
+
 <div id="home-hero">
 	<div class="container">
 		<div id="home-logo">SynchroDev</div>
@@ -25,6 +84,7 @@
 		   	 	<div id="signup-legal">
 		   	 		By joining SynchroDev, you agree to Boncom's User Agreement and Privacy Policy.
 				</div>
+				<div class="error" id="signup-errors"></div>
 		    </form>
 
 		</div>

@@ -2,11 +2,11 @@
 
 $(document).ready(function() {
 
-	var signupForm = $('#signup-form');
+	var signinForm = $('#signin-form');
 
-	signupForm.validate();
+	signinForm.validate();
 
-	signupForm.submit(function() {
+	signinForm.submit(function() {
 
 		if (!$(this).valid()) {
 			return false;
@@ -25,8 +25,9 @@ $(document).ready(function() {
 		  if (response.err) {
 		    // show user the actual error
 		    errorDiv.append(response.err);
-		    errorDiv.show();
 		  }
+
+		  errorDiv.show();
 
 		};
 
@@ -46,29 +47,6 @@ $(document).ready(function() {
 
 		makeAjaxRequest("POST", $(this).attr('action'), dataString, successHandler, errorHandler);
 
-		// $.ajax({
-		//     type: "POST",
-		//     url: $(this).attr('action'),
-		//     data: dataString,
-		//     dataType: "JSON"
-		// }).success(function(response){
-		    
-		//     console.log(response);
-
-		//     if (response.error || !response.id) {
-		//       errorHandler(response);
-		//     }
-		//     else {
-		//       	// Successful login, redirect...
-		      	
-		//     }
-
-		// }).error(function(response, status, err){
-		    
-		//     errorHandler(response);
-
-		// });
-
 		return false; // prevents normal behaviour
 
 	});
@@ -79,7 +57,7 @@ $(document).ready(function() {
 
 </script>
 
-<form id="signup-form" accept-charset="UTF-8" action="/session/create" method="post">
+<form id="signin-form" accept-charset="UTF-8" action="/session/create" method="post">
 	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <input class="" name="email" placeholder="Email" type="email" required>
     <input class="" name="password" placeholder="Password" type="password" required>
