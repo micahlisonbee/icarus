@@ -58,7 +58,8 @@ body {
 
 input[type="text"],
 input[type="password"],
-input[type="tel"] {
+input[type="tel"],
+input[type="email"] {
   width: 100%;
   border: none;
   margin: 10px 0;
@@ -67,7 +68,8 @@ input[type="tel"] {
 
 input[type="text"].dark,
 input[type="password"].dark,
-input[type="tel"].dark {
+input[type="tel"].dark,
+input[type="email"].dark {
   border: 1px solid #333;
   color: #fff;
 }

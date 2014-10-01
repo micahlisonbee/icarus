@@ -57,6 +57,11 @@
             <li><a href="#">Get Started</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/account">Account</a></li>
+            <% if (session.authenticated) { %>
+              <li><a href="/session/destroy">Sign Out</a></li>
+            <% } else { %>
+              <li><a href="/session/new">Sign In</a></li>
+            <% } %>
           </ul>
         </div>
       </div>
@@ -119,6 +124,7 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/custom.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>

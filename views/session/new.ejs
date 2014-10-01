@@ -1,0 +1,96 @@
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	var signupForm = $('#signup-form');
+
+	signupForm.validate();
+
+	signupForm.submit(function() {
+
+		if (!$(this).valid()) {
+			return false;
+		}
+
+		var errorDiv = $('#signin-errors');
+		var successDiv = $('#signin-success');
+
+		errorDiv.hide();
+		successDiv.hide();
+
+		var errorHandler = function(response) {
+		  console.log("Error Signing In");
+		  errorDiv.text('Whoops! There was an error signing in. ');
+
+		  if (response.err) {
+		    // show user the actual error
+		    errorDiv.append(response.err);
+		    errorDiv.show();
+		  }
+
+		};
+
+		var successHandler = function(response) {
+			if (response.err) {
+				errorHandler(response);
+				return;
+			} else {
+				if (response.user) {
+					// User is signed in... redirect.
+					console.log(response.user);
+				}
+			}
+		};
+
+		var dataString = $(this).serialize();
+
+		makeAjaxRequest("POST", $(this).attr('action'), dataString, successHandler, errorHandler);
+
+		// $.ajax({
+		//     type: "POST",
+		//     url: $(this).attr('action'),
+		//     data: dataString,
+		//     dataType: "JSON"
+		// }).success(function(response){
+		    
+		//     console.log(response);
+
+		//     if (response.error || !response.id) {
+		//       errorHandler(response);
+		//     }
+		//     else {
+		//       	// Successful login, redirect...
+		      	
+		//     }
+
+		// }).error(function(response, status, err){
+		    
+		//     errorHandler(response);
+
+		// });
+
+		return false; // prevents normal behaviour
+
+	});
+
+
+
+});
+
+</script>
+
+<form id="signup-form" accept-charset="UTF-8" action="/session/create" method="post">
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+    <input class="" name="email" placeholder="Email" type="email" required>
+    <input class="" name="password" placeholder="Password" type="password" required>
+    <div class="col-md-6"> 
+    	<button class="btn btn-default" type="submit">Sign In</button>
+    </div>
+    <div class="col-md-6"> 
+    	<div id="or">or <a href="/">Sign Up</a></div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="error" id="signin-errors"></div>
+</form>
+
+
