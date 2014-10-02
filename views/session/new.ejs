@@ -59,6 +59,15 @@ $(document).ready(function() {
 });
 
 </script>
+<style type="text/css">
+
+body {
+  min-height: 100%;
+  background:url(../images/hero-blurred.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+</style>
 
 <!-- Poor man's version of flash messaging, simplier -->
 <% if (req.param("msg")) { %>
@@ -66,13 +75,14 @@ $(document).ready(function() {
 <% } %>
 
 <form id="signin-form" accept-charset="UTF-8" action="/session/create" method="post">
+	<div class="block-title">Sign In</div>
 	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <input class="" name="email" placeholder="Email" type="email" required>
     <input class="" name="password" placeholder="Password" type="password" required>
-    <div class="col-md-6"> 
-    	<button class="btn btn-default" type="submit">Sign In</button>
+    <div class="col-md-6 no-padding"> 
+    	<button class="button button-light" type="submit">Sign In</button>
     </div>
-    <div class="col-md-6"> 
+    <div class="col-md-6 no-padding"> 
     	<div id="or">or <a href="/">Sign Up</a></div>
 	</div>
 	<div class="clearfix"></div>

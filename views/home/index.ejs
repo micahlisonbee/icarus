@@ -60,14 +60,7 @@ $(document).ready(function() {
 
 <div id="home-hero">
 	<div class="container">
-		<div id="home-logo">SynchroDev</div>
-		<div class="col-md-6">
-			<div id="home-bullets">
-				<div class="home-bullet">Synchronized Interactions</div>
-				<div class="home-bullet">Rapid Development</div>
-				<div class="home-bullet">Cross-Device</div>
-			</div>
-		</div>
+		<div id="home-logo"></div>
 		<div class="col-md-6">
 		    <form id="signup-form" accept-charset="UTF-8" action="/user/create" method="post">
 		    	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
@@ -75,11 +68,12 @@ $(document).ready(function() {
 				<input class="" name="lastName" placeholder="Last Name" type="text" required> 
 		        <input class="" name="email" placeholder="Email" type="email" required>
 		        <input class="" name="password" placeholder="Password" type="password" required>
-		        <div class="col-md-6"> 
-		        	<button class="btn btn-default" type="submit">Sign Up</button>
+		        <div class="clearfix"></div>
+		        <div class="col-md-6 no-padding"> 
+		        	<button class="button button-light" type="submit">Sign Up</button>
 		        </div>
-		        <div class="col-md-6"> 
-		        	<div id="or">or <a href="/session/new">Sign In</a></div>
+		        <div class="col-md-6 no-padding"> 
+		        	<div id="or">or <a class="bold" href="/session/new">Sign In</a></div>
 		   	 	</div>
 		   	 	<div class="clearfix"></div>
 		   	 	<div id="signup-legal">
@@ -87,7 +81,13 @@ $(document).ready(function() {
 				</div>
 				<div class="error" id="signup-errors"></div>
 		    </form>
-
+		</div>
+		<div class="col-md-6">
+			<div id="home-bullets">
+				<div class="home-bullet" id="bullet1">Synchronized Interactions</div>
+				<div class="home-bullet" id="bullet2">Rapid Development</div>
+				<div class="home-bullet" id="bullet3">Cross-Device</div>
+			</div>
 		</div>
 		
 	</div>
