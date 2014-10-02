@@ -1,0 +1,52 @@
+    <div class="footer">
+      <div class="container">
+        <div class="col-md-2">
+          <div id="footer-logo"></div>
+        </div>
+        <div class="col-md-10">
+          <div id="footer-links">
+            <% if (!session.authenticated) { %>
+              <div class="col-md-2">
+                <a href="/ourProduct">Our Product</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/about">About Us</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/getStarted">Get Started</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/privacyPolicy">Privacy</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/session/new">Sign In</a>
+              </div>
+              <div class="col-md-2"></div>
+
+            <% } else { %>
+
+              <div class="col-md-2">
+                <a href="/about">About Us</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/privacyPolicy">Privacy</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/dashboard">Dashboard</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/account">Account</a>
+              </div>
+              <div class="col-md-2">
+                <a href="/session/destroy">Sign Out</a>
+              </div>
+
+              <div class="col-md-2"></div>
+              
+            <% } %>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div id="footer-legal">&copy; 2014 by Boncom. All rights reserved.</div>
+      </div>
+    </div>
