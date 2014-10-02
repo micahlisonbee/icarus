@@ -11,7 +11,8 @@ module.exports = {
 
 	    var syncSpaceObj = {
 	      name: req.param('name'),
-	      user: req.param('user')
+	      user: req.param('user'),
+	      url: "http://synchrodev.com/1234567abcdefg"
 	    };
 
 	    if ((syncSpaceObj.name == null || syncSpaceObj.name == '') ||

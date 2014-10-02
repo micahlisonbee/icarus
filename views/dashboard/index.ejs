@@ -61,7 +61,7 @@ $(document).ready(function() {
 
 		      		});
 
-		      		$('#sync_space-list table tr:last').after('<tr><td>check</td><td>'+ response.name+ '</td><td>'+ response.url +'</td></tr>');
+		      		$('#sync_space-list table tr:last').after('<tr><td>'+ response.syncSpace.name+ '</td><td>'+ response.syncSpace.url +'</td><td>Edit</td></tr>');
 				}
 			}
 		};
@@ -101,17 +101,17 @@ $(document).ready(function() {
 	<div id="sync_space-list">
 		<table>
 			<tr>
-				<th></th>
 				<th>Name</th>
 				<th>Url</th>
+				<th></th>
 			</tr>
 
 			<% syncSpaces.forEach(function(sp, index){ %>
 
 				<tr>
-					<td>check</td>
 					<td><%= sp.name  %></td>
 					<td><%= sp.url  %></td>
+					<td>Edit</td>
 				</tr>
 
 			<% }); %>

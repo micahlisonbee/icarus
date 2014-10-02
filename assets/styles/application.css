@@ -113,7 +113,6 @@ input[type="email"].dark {
   width: 100%;
   max-width: 500px;
   margin: 20px auto;
-  background: gray;
 }
 
 #sync_space-list table th,
