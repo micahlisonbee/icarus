@@ -25,8 +25,6 @@ module.exports = {
 		.catch(function(err){
 		  console.log("error occured: " + err);
 		});
-
-
 		
 	}
 	

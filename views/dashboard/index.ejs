@@ -23,63 +23,56 @@ $(document).ready(function() {
 			return false;
 		}
 
-		$('#new-sync-space-errors').hide();
-		$('#new-sync-space-success').hide();
+		var errorDiv = $('#new-sync-space-errors')
+		var successDiv = $('#new-sync-space-success')
+
+		errorDiv.hide();
+		successDiv.hide();
 
 		var errorHandler = function(response) {
-		  console.log("Error Saving Object");
-		  $('.errors-wrapper').prepend('Whoops! There was an error creating this Sync Space.');
+		  console.log("Error Creating Sync Space");
+		  errorDiv.text('Whoops! There was an error creating this sync space. ');
 
-		  if (response.error) {
+		  if (response.err) {
 		    // show user the actual error
-		    $('#new-sync-space-errors').append(response.error);
-		    $('#new-sync-space-errors').show();
+		    errorDiv.append(response.err);
 		  }
 
+		  errorDiv.show();
+
+		};
+
+		var successHandler = function(response) {
+			if (response.err) {
+				errorHandler(response);
+				return;
+			} else {
+				if (response.syncSpace) {
+					
+					console.log(response.syncSpace);
+
+					successDiv.show();
+		      		newSyncSpaceDiv.fadeOut(1500, function(){
+
+		      			successDiv.hide();
+
+		      			//reset the form
+		      			newSyncSpaceForm.find('input[name=name]').val('');
+
+		      		});
+
+		      		$('#sync_space-list table tr:last').after('<tr><td>check</td><td>'+ response.name+ '</td><td>'+ response.url +'</td></tr>');
+				}
+			}
 		};
 
 		var dataString = $(this).serialize();
 
-		$.ajax({
-		    type: "POST",
-		    url: $(this).attr('action'),
-		    data: dataString,
-		    dataType: "JSON"
-		}).success(function(response){
-		    
-		    console.log(response);
-
-		    if (response.error || !response.id) {
-		      errorHandler(response);
-		    }
-		    else {
-		      	// Successful save, insert the row
-		      	$('#new-sync-space-success').show();
-		      	newSyncSpaceDiv.fadeOut(1500, function(){
-
-		      		$('#new-sync-space-success').hide();
-
-		      		//reset the form
-		      		newSyncSpaceForm.find('input').val('');
-
-		      	});
-
-		      	$('#sync_space-list table tr:last').after('<tr><td>check</td><td>'+ response.name+ '</td><td>'+ response.url +'</td></tr>');
-		      	
-		      	
-		    }
-
-		}).error(function(response, status, err){
-		    
-		    errorHandler(response);
-
-		});
+		makeAjaxRequest("POST", $(this).attr('action'), dataString, successHandler, errorHandler);
 
 		return false; // prevents normal behaviour
 
 	});
-
-
 
 });
 
@@ -97,8 +90,7 @@ $(document).ready(function() {
 			<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 			<input type="hidden" name="user" value="<%= user.id %>" />
 			<div class="col-md-3">New Sync Space:</div>
-			<div class="col-md-3"><input name="name" class="dark" type="text" placeholder="Name" required /></div>
-			<div class="col-md-3"><input name="url" class="dark" type="text" placeholder="URL" required /></div>
+			<div class="col-md-3"><input name="name" type="text" placeholder="Name" required /></div>
 			<div class="col-md-3"><button id="submit-new-sync-space-btn" class="btn btn-default">Create</button></div>
 			<div class="clearfix"></div>
 		</form>
