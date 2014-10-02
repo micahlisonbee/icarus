@@ -9,6 +9,10 @@ module.exports = {
 	
 	'ourProduct': function(req, res) {
 		res.view();
+	},
+
+	'getStarted': function(req, res) {
+		res.view();
 	}
 
 };

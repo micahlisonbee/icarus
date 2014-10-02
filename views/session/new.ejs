@@ -39,6 +39,7 @@ $(document).ready(function() {
 				if (response.user) {
 					// User is signed in... redirect.
 					console.log(response.user);
+					window.location.replace('/dashboard');
 				}
 			}
 		};

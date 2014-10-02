@@ -40,6 +40,7 @@ module.exports.routes = {
   'get /dashboard': 'DashboardController.index',
   'get /account': 'AccountController.index',
   'get /ourProduct': 'PromotionalController.ourProduct',
+  'get /getStarted': 'PromotionalController.getStarted',
   'get /about': 'AboutController.index',
   'get /privacyPolicy': 'LegalController.privacyPolicy'
 
