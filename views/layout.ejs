@@ -52,15 +52,15 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/ourProduct">Our Product</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/getStarted">Get Started</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/account">Account</a></li>
             <% if (session.authenticated) { %>
+              <li id="dashboard-nav"><a href="/dashboard">Dashboard</a></li>
+              <li id="account-nav"><a href="/account">Account</a></li>
               <li><a href="/session/destroy">Sign Out</a></li>
             <% } else { %>
-              <li><a href="/session/new">Sign In</a></li>
+              <li id="ourproduct-nav"><a href="/ourProduct">Our Product</a></li>
+              <li id="about-nav"><a href="/about">About Us</a></li>
+              <li id="getstarted-nav"><a href="/getStarted">Get Started</a></li>
+              <li id="signin-nav"><a href="/session/new">Sign In</a></li>
             <% } %>
           </ul>
         </div>

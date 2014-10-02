@@ -12,6 +12,7 @@ module.exports = {
 	},
 
 	create: function(req, res, next) {
+		console.log("Recieving user attributes...");
 
 	    var userObj = {
 	      firstName: req.param('firstName'),
@@ -19,6 +20,8 @@ module.exports = {
 	      email: req.param('email'),
 	      password: req.param('password')
 	    };
+
+	    console.log(userObj);
 
 	    if ((userObj.firstName == null || userObj.firstName == '') ||
 			(userObj.lastName == null || userObj.lastName == '') ||
@@ -32,6 +35,7 @@ module.exports = {
 
 	    // Create a User with the params sent from 
 	    // the sign-up form --> new.ejs
+	    console.log("Creating user...");
 	    User.create(userObj, function userCreated(err, user) {
 
 			if (err) {

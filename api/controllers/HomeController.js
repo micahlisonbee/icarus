@@ -8,6 +8,12 @@
 module.exports = {
 	
 	'index': function(req, res) {
+
+		if (req.session.authenticated) {
+			res.redirect('/dashboard');
+			return;
+		}
+
 		res.view({
 			_layoutFile: '../../views/layoutHome.ejs'
 		});

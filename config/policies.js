@@ -28,12 +28,14 @@ module.exports.policies = {
 
   // '*': true,
 
-  user: {
-    '*': "authenticated"
-  },
+  // user: {
+  //   '*': "authenticated"
+  // },
+
   dashboard: {
     '*': "authenticated"
   },
+  
   account: {
     '*': "authenticated"
   }

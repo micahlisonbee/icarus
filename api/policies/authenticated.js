@@ -11,6 +11,7 @@ module.exports = function(req, res, ok) {
   // User is not allowed
   else {
 
+    console.log('Access denied, not logged in');
     res.redirect('/session/new?msg=You must sign in to view this page.');
 
     return;
