@@ -57,6 +57,11 @@ $(document).ready(function() {
 
 </script>
 
+<!-- Poor man's version of flash messaging, simplier -->
+<% if (req.param("msg")) { %>
+	<div>message: <%= req.param("msg") %></div>
+<% } %>
+
 <form id="signin-form" accept-charset="UTF-8" action="/session/create" method="post">
 	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
     <input class="" name="email" placeholder="Email" type="email" required>
