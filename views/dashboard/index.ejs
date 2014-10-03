@@ -54,16 +54,17 @@ $(document).ready(function() {
 					console.log(response.syncSpace);
 
 					successDiv.show();
-		      		newSyncSpaceDiv.fadeOut(1500, function(){
 
-		      			successDiv.hide();
 
-		      			//reset the form
-		      			newSyncSpaceForm.find('input[name=name]').val('');
+					setTimeout(function() {
+						newSyncSpaceDiv.fadeOut(500, function(){
+		      				successDiv.hide();
+		      				newSyncSpaceForm.find('input[name=name]').val('');
+		      			});
+					}, 1000);
 
-		      		});
 
-		      		$('#sync_space-list table tr:last').after('<tr><td>'+ response.syncSpace.name+ '</td><td>'+ response.syncSpace.url +'</td><td>Edit</td></tr>');
+		      		$('#sync-space-list table tr:last').after('<tr><td>'+ response.syncSpace.name+ '</td><td>'+ response.syncSpace.url +'</td><td>Edit</td></tr>');
 				}
 			}
 		};
@@ -81,43 +82,58 @@ $(document).ready(function() {
 </script>
 
 <div class="container top-container">
-	<div class="col-md-6 page-title">Dashboard</div>
-	<div class="col-md-6 page-button">
-		<button id="new-sync-space-btn" class="btn btn-default">New Sync Space</button>
+	<div class="col-md-2"></div>
+	<div class="col-md-4 page-title">Dashboard</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-2 page-button">
+		<button id="new-sync-space-btn" class="button button-light">New Sync Space</button>
 	</div>
+	<div class="col-md-2"></div>
 	<div class="clearfix"></div>
 	
-	<div id="new-sync-space">
-		<form action="syncSpace/create" method="POST" id="new-sync-space-form">
-			<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-			<input type="hidden" name="user" value="<%= user.id %>" />
-			<div class="col-md-3">New Sync Space:</div>
-			<div class="col-md-3"><input name="name" type="text" placeholder="Name" required /></div>
-			<div class="col-md-3"><button id="submit-new-sync-space-btn" class="btn btn-default">Create</button></div>
-			<div class="clearfix"></div>
-		</form>
-		<div id="new-sync-space-errors" class="error">Whoops! There was an error. </div>
-		<div id="new-sync-space-success" class="success">Successfully Added</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div id="new-sync-space">
+			<form action="syncSpace/create" method="POST" id="new-sync-space-form">
+				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				<input type="hidden" name="user" value="<%= user.id %>" />
+				<div class="col-md-4 no-padding" id="new-sync-title">New Sync Space:</div>
+				<div class="col-md-5 no-padding"><input name="name" type="text" placeholder="Name" required /></div>
+				<div class="col-md-3"><button id="submit-new-sync-space-btn" class="button">Create</button></div>
+				<div class="clearfix"></div>
+			</form>
+			<div id="new-sync-space-errors" class="error">Whoops! There was an error. </div>
+			<div id="new-sync-space-success" class="success">Successfully Added</div>
+		</div>
 	</div>
+	<div class="col-md-2"></div>
 
-	<div id="sync_space-list">
-		<table>
-			<tr>
-				<th>Name</th>
-				<th>Url</th>
-				<th></th>
-			</tr>
-
-			<% syncSpaces.forEach(function(sp, index){ %>
-
+</div>
+<div class="container">
+	<div class="col-md-2 page-title"></div>
+	<div class="col-md-8">
+		<div id="sync-space-list">
+			<table>
 				<tr>
-					<td><%= sp.name  %></td>
-					<td><%= sp.url  %></td>
-					<td>Edit</td>
+					<th>Name</th>
+					<th>Url</th>
+					<th></th>
 				</tr>
 
-			<% }); %>
-	
-		</table>
+				<% syncSpaces.forEach(function(sp, index){ %>
+
+					<tr>
+						<td><%= sp.name  %></td>
+						<td><%= sp.url  %></td>
+						<td>Edit</td>
+					</tr>
+
+				<% }); %>
+		
+			</table>
+		</div>
 	</div>
+	<div class="col-md-2"></div>
 </div>
+
+
